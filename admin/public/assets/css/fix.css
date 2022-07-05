@@ -1,0 +1,8 @@
+.dataTables_wrapper .dataTables_length select {
+    width: 60px !important;
+  }
+  
+  .dataTables_wrapper .dataTables_length {
+    margin-bottom: 30px !important;
+  }
+  

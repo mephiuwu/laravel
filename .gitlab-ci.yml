@@ -1,0 +1,32 @@
+desarrollo:
+  stage: deploy
+  script:
+  - rsync -auv --chown=laravelaeurus:laravelaeurus --exclude='.htaccess' --exclude='CHANGELOG' --exclude='.gitlab-ci.yml' --exclude='.git'  --exclude='.env' . /home/laravelaeurus/public_html/
+  - cd /home/laravelaeurus/public_html/
+  - php artisan migrate
+  
+  artifacts:
+    paths:
+    - public
+  only:
+  - desarrollo
+
+#testing:
+#  stage: deploy
+#  script:
+#  - rsync -auv --chown=SITIOQA:SITIOQA --exclude='*application/configs/application.ini' --exclude='*application/config/database.php' --exclude='/index.php' --exclude='/admin/index.php' --exclude='ws.php' --exclude='Ws.php' --exclude='.htaccess' --exclude='CHANGELOG' --exclude='configuracion.ini' --exclude='.gitlab-ci.yml' --exclude='.git' --exclude='.env'  --exclude='robots.txt' --exclude='/admin/webservice' --exclude='BD' . root@209.126.103.129:/home/SITIOQA/public_html/
+#  artifacts:
+#    paths:
+#    - public
+#  only:
+#  - master
+
+#produccion:
+#  stage: deploy
+#  script:
+#  - rsync -auv --chown=PRODUCCION:PRODUCCION --exclude='*application/configs/application.ini'  --exclude='/maqueta/' --exclude='*application/config/database.php' --exclude='/index.php' --exclude='/admin/index.php' --exclude='ws.php' --exclude='Ws.php' --exclude='.htaccess' --exclude='CHANGELOG' --exclude='configuracion.ini' --exclude='.gitlab-ci.yml' --exclude='.git' --exclude='.env' --exclude='robots.txt' --exclude='/admin/webservice' --exclude='BD' . root@209.126.103.129:/home/PRODUCCION/public_html/ 
+#  artifacts:
+#    paths:
+#    - public
+#  only:
+#  - produccion
